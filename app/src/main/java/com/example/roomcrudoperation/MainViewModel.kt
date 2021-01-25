@@ -13,9 +13,10 @@ import io.reactivex.schedulers.Schedulers
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-     var allContacts: MutableLiveData<List<Contact>>? =null
+    var allContacts: MutableLiveData<List<Contact>>? = null
     lateinit var compositeDisposable: CompositeDisposable
     lateinit var contactDatabase: ContactDatabase
+
     init {
         allContacts = MutableLiveData()
         compositeDisposable = CompositeDisposable()
@@ -23,23 +24,34 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
-    fun  getContacts(): MutableLiveData<List<Contact>>
-    {
-        if (allContacts !=null){
+    fun getContacts(): MutableLiveData<List<Contact>> {
+        if (allContacts != null) {
             compositeDisposable.add(contactDatabase.contactDao().getAllContacts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({list->
+                .subscribe({ list ->
                     Toast.makeText(getApplication(), "Success", Toast.LENGTH_SHORT).show()
                     allContacts!!.value = list
 
-                },{
-                    Toast.makeText(getApplication(), ""+it.message, Toast.LENGTH_SHORT).show()
-                }))
+                }, {
+                    Toast.makeText(getApplication(), "" + it.message, Toast.LENGTH_SHORT).show()
+                })
+            )
         }
 
         return allContacts!!
     }
 
+
+    fun addContact(contact: Contact) {
+        compositeDisposable.add(contactDatabase.contactDao().insertContact(contact)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Toast.makeText(getApplication(), "Contact Added", Toast.LENGTH_SHORT).show()
+            },{
+
+            }))
+    }
 
 }

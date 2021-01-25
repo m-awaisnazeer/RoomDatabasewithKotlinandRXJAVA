@@ -35,9 +35,10 @@ class RecyclerViewAdapter(var allcontacts: List<Contact>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var contact: Contact = allcontacts.get(position)
 
-        holder.name.setText(contact.name)
-        holder.email.setText(contact.email)
-        holder.phone.setText(contact.phone)
+
+        holder.name.append(contact.name)
+        holder.email.append(contact.email)
+        holder.phone.append(contact.phone)
 
     }
 }
