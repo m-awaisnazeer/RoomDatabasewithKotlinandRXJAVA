@@ -17,6 +17,7 @@ class RecyclerViewAdapter(var allcontacts: List<Contact>,var iRecyclerViewItemCl
         lateinit var email: TextView
         lateinit var edit_contact:ImageView
         lateinit var delete_contact:ImageView
+        lateinit var id:TextView
 
         init {
             name = itemView.findViewById(R.id.name)
@@ -24,6 +25,7 @@ class RecyclerViewAdapter(var allcontacts: List<Contact>,var iRecyclerViewItemCl
             email = itemView.findViewById(R.id.email)
             edit_contact = itemView.findViewById(R.id.edit_contact)
             delete_contact = itemView.findViewById(R.id.delete_contact)
+            id = itemView.findViewById(R.id.id)
         }
 
     }
@@ -45,6 +47,7 @@ class RecyclerViewAdapter(var allcontacts: List<Contact>,var iRecyclerViewItemCl
         holder.name.append(contact.name)
         holder.email.append(contact.email)
         holder.phone.append(contact.phone)
+        holder.id.append(contact.id.toString())
 
         holder.delete_contact.setOnClickListener {
             iRecyclerViewItemClickListner.onItemClick(true,false,position,contact)

@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "contact")
 data class Contact(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id") var id:Int?=null,
     @ColumnInfo(name = "name") var name:String? = null,
     @ColumnInfo(name="phone") var phone:String? = null,
     @ColumnInfo(name="email") var email:String? = null
 ) {
+    @PrimaryKey(autoGenerate = true)
+    var id = 0
 }

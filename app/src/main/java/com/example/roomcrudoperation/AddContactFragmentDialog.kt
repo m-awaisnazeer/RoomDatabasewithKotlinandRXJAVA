@@ -94,7 +94,8 @@ class AddContactFragmentDialog : DialogFragment() {
                     return@setOnClickListener
                 }
 
-                var contact: Contact = Contact(Constants.selectedContact!!.id,name = name, phone = phone, email = email)
+                var contact: Contact = Contact(name = name, phone = phone, email = email)
+                contact.id=Constants.selectedContact!!.id
                 model.updateContact(contact)
                 Constants.selectedContact = null
                 dialog!!.dismiss()
@@ -122,7 +123,7 @@ class AddContactFragmentDialog : DialogFragment() {
                     return@setOnClickListener
                 }
 
-                var contact: Contact = Contact(id= Random.nextInt(),name = name, phone = phone, email = email)
+                var contact: Contact = Contact(name = name, phone = phone, email = email)
 
                 model.addContact(contact)
                 dialog!!.dismiss()

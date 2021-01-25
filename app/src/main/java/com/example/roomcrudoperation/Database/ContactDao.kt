@@ -16,7 +16,7 @@ interface ContactDao {
     @Delete
     fun deleteContact(contact: Contact): Completable
 
-    @Update
-    fun updateContact(contact: Contact)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateContact(contact: Contact):Completable
 
 }

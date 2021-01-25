@@ -74,41 +74,26 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun updateContact(contact: Contact) {
 
-        UpdateContact(contactDatabase.contactDao()).execute(contact)
 
-//        compositeDisposable.add(
-//            contactDatabase.contactDao().updateContact(contact)
-//                .observeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe({
-//                    Toast.makeText(getApplication(), "Contact Updated", Toast.LENGTH_SHORT).show()
-//
-//                }, {
-//                    Toast.makeText(
-//                        getApplication(),
-//                        "Contact Updation Failed" + it.message,
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//
-//                })
-//        )
+        compositeDisposable.add(
+            contactDatabase.contactDao().updateContact(contact)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    Toast.makeText(getApplication(), "Contact Updated", Toast.LENGTH_SHORT).show()
+
+                }, {
+                    Toast.makeText(
+                        getApplication(),
+                        "Contact Updation Failed" + it.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                })
+        )
 
     }
 
-    private class UpdateContact(contactDao: ContactDao) :
-        AsyncTask<Contact?, Void?, Void?>() {
-        private val contactDao: ContactDao
 
-
-        init {
-            this.contactDao = contactDao
-        }
-
-        override fun doInBackground(vararg params: Contact?): Void? {
-            contactDao.updateContact(params[0]!!)
-            Log.d("TAG", "doInBackground: updated")
-            return null
-        }
-    }
 
 }
