@@ -4,28 +4,58 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/name"
-            android:text="Name: "
-            />
+            android:orientation="vertical"
+            android:id="@+id/txts"
+            android:layout_toLeftOf="@+id/funs"
+            android:padding="10dp">
 
-        <TextView
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name: " />
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phone: " />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email: " />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_height="wrap_content"
-            android:text="Phone: "
-            android:id="@+id/phone"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/email"
-            android:text="Email: "/>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:id="@+id/funs"
+            android:padding="10dp"
+            android:layout_alignParentRight="true">
+            <ImageView
+                android:id="@+id/edit_contact"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:layout_width="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_height="30dp" />
+
+
+            <ImageView
+                android:id="@+id/delete_contact"
+                android:layout_width="30dp"
+                android:src="@drawable/ic_baseline_delete_24"
+                android:layout_height="30dp" />
+        </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>
